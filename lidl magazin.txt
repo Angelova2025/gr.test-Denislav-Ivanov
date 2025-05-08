@@ -1,0 +1,42 @@
+       Console.Write("Въведете брой артикули: ");
+    int itemCount = int.Parse(Console.ReadLine());
+
+    double total = 0;
+
+    for (int i = 1; i <= itemCount; i++)
+    {
+        Console.Write($"Въведете цена на артикул {i}: ");
+        double price = double.Parse(Console.ReadLine());
+
+        total = AddToTotal(total, price);
+    }
+
+    Console.WriteLine($"Обща сума преди отстъпка: {total:F2} лв");
+
+    bool hasDiscount = total > 100;
+    double finalTotal = CalculateFinalTotal(total, hasDiscount);
+
+    if (hasDiscount)
+    {
+        Console.WriteLine("Получавате 10% отстъпка!");
+    }
+
+    Console.WriteLine($"Крайна сума за плащане: {finalTotal:F2} лв");
+    Console.WriteLine($"Общо артикули: {itemCount}");
+}
+
+static double AddToTotal(double currentTotal, double price)
+{
+    return currentTotal + price;
+}
+
+static double CalculateFinalTotal(double total, bool hasDiscount)
+{
+    if (hasDiscount)
+    {
+        return total * 0.90; 
+    }
+    else
+    {
+        return total;
+    }
